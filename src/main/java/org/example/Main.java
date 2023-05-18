@@ -18,15 +18,26 @@ public class Main {
     static BookRepository bookRepository =  (BookRepository) context.getBean("bookRepository");
 
     public static void main(String[] args) {
-//        createNewBook();
-        readBook();
+//     createNewBook();
+//        readBook();
 //        update(1);
 //        detele(3);
 //        readBook();
+//        lessThan();
+//        greaterThan();
+//        dataStart();
+//        dataBefore();
+//        nul();
+//        notNul();
+//        like();
+//        like_start();
+//        like_end();
+//        like_containing();
+        orderBy();
     }
     public static void createNewBook() {
         BookEntity bookEntity = new BookEntity();
-        bookEntity.setName("chinh");
+        bookEntity.setName("tran cong chinh");
         bookEntity.setAuthor("Roger");
         bookEntity.setCategory("IT books");
         bookEntity.setIsbn("ISIBF1219323");
@@ -74,5 +85,73 @@ public class Main {
             System.out.println("không có tài khoản " + bookId);
         }
     }
-
+     private static void lessThan(){
+       List<BookEntity>  bookEntityList =  bookRepository.findByPublishDateLessThan(LocalDate.parse("2016-08-26"));
+//        for (BookEntity book : bookEntityList){
+//            System.out.println(book.toString());
+//        }
+         for (int i = 0; i < bookEntityList.size(); i++) {
+             System.out.println(bookEntityList.get(i).toString());
+         }
+    }
+    private static void greaterThan(){
+        List<BookEntity> bookEntityList = bookRepository.findByPublishDateGreaterThan(LocalDate.parse("2016-08-24"));
+        for (BookEntity book : bookEntityList){
+            System.out.println(book.toString());
+        }
+    }
+    private static void dataStart(){
+        List<BookEntity> bookEntityList = bookRepository.findByPublishDateAfter(LocalDate.parse("2016-08-24"));
+        for (BookEntity book : bookEntityList){
+            System.out.println(book.toString());
+        }
+    }
+    private static void dataBefore(){
+        List<BookEntity> bookEntityList = bookRepository.findByPublishDateBefore(LocalDate.parse("2016-08-24"));
+        for (BookEntity book : bookEntityList){
+            System.out.println(book.toString());
+        }
+    }
+    private static void nul(){
+        List<BookEntity> bookEntityList = bookRepository.findByPublishDateIsNull();
+        for (BookEntity book : bookEntityList){
+            System.out.println(book.toString());
+        }
+    }
+    private static void notNul(){
+        List<BookEntity> bookEntityList = bookRepository.findByPublishDateNotNull();
+        for (BookEntity book : bookEntityList){
+            System.out.println(book.toString());
+        }
+    }
+    private static void like(){
+        List<BookEntity> bookEntityList = bookRepository.findByNameLike("chinh");
+        for (BookEntity book : bookEntityList){
+            System.out.println(book.toString());
+        }
+    }
+    private static void like_start(){
+        List<BookEntity> bookEntityList = bookRepository.findByNameStartingWith("chinh");
+        for (BookEntity book : bookEntityList){
+            System.out.println(book.toString());
+        }
+    }
+    private static void like_end(){
+        List<BookEntity> bookEntityList = bookRepository.findByNameEndingWith("chinh");
+        for (BookEntity book : bookEntityList){
+            System.out.println(book.toString());
+        }
+    }
+    private static void like_containing(){
+        List<BookEntity> bookEntityList = bookRepository.findByNameContaining("chinh");
+        for (BookEntity book : bookEntityList){
+            System.out.println(book.toString());
+        }
+    }
+    private static void orderBy(){
+        List<BookEntity> bookEntityList = bookRepository.findByNameOrderByIdDesc("chinh");
+        for (BookEntity book : bookEntityList){
+            System.out.println(book.toString());
+        }
+    }
 }
